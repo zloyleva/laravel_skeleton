@@ -13,6 +13,7 @@
 
 1. Install composer dependency, run: 
     ```bash
+    sudo usermod -a -G docker $USER #Add permission
     make composer_dep
     ```
 2. Set permissions on the project directory so that it is owned by your non-root user:
