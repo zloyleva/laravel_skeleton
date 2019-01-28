@@ -1,6 +1,18 @@
 version: '3'
 services:
 
+  nodejs:
+    build:
+      context: .
+      dockerfile: ./docker/nodejs/Dockerfile
+    depends_on:
+      - app
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/app/
+      - /home/app/node_modules
+
   #PHP Service
   app:
     build:
@@ -44,8 +56,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: j7KU7TmvUa
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
