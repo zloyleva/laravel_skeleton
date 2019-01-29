@@ -1,4 +1,6 @@
 php = app
+db = db
+nodejs = nodejs
 
 #####################################
 ###                               ###
@@ -39,23 +41,35 @@ stop: #stop docker container
 show: #show docker's containers
 	@sudo docker ps
 
+connect_app: #Connect
+	@docker-compose exec $(php) bash
+
 connect_db: #Connect
-	@docker-compose exec db bash
+	@docker-compose exec $(db) bash
 
 connect_nodejs: #Connect
-	@sudo docker-compose exec nodejs /bin/sh
-
-
-watch: #Run watch
-	@sudo docker-compose exec nodejs npm run watch
-
-tinker: #Run tinker
-	@sudo docker-compose exec app php artisan tinker
+	@sudo docker-compose exec $(nodejs) /bin/sh
 
 
 run_com_app: #Run commands in PHP container c=[commands]
-	@sudo docker exec -it $(php) bash -c '$(c)'
+	@sudo docker-compose exec $(php) $(c)
+
+run_com_node: #Run commands in PHP container c=[commands]
+	@sudo docker-compose exec $(nodejs) $(c)
+
+
+#####################################
+###                               ###
+###          Work with FE         ###
+###                               ###
+#####################################
+
+watch: #Run watch
+	@sudo docker-compose exec $(nodejs) npm run watch
+
+tinker: #Run tinker
+	@sudo docker-compose exec $(php) php artisan tinker
 
 
 refresh: #Refresh the database and run all database seeds
-	@sudo docker-compose exec app php artisan migrate:refresh --seed
+	@sudo docker-compose exec app $(php) artisan migrate:refresh --seed
