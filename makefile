@@ -30,7 +30,7 @@ stop: #stop docker container
 
 #####################################
 ###                               ###
-###       Start/stop project      ###
+###       Work in containers      ###
 ###                               ###
 #####################################
 
@@ -49,6 +49,9 @@ watch: #Run watch
 
 tinker: #Run tinker
 	@sudo docker-compose exec app php artisan tinker
+
+
+
 
 refresh: #Refresh the database and run all database seeds
 	@sudo docker-compose exec app php artisan migrate:refresh --seed
