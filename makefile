@@ -73,3 +73,10 @@ tinker: #Run tinker
 
 refresh: #Refresh the database and run all database seeds
 	@sudo docker-compose exec app $(php) artisan migrate:refresh --seed
+
+
+composer_update: composer_autoload #Composer update
+	@sudo docker-compose exec $(php) php composer.phar update
+
+composer_autoload: #Composer dump autoload
+	@sudo docker-compose exec $(php) php composer.phar dump-autoload
