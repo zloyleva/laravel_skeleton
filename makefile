@@ -1,3 +1,5 @@
+php = app
+
 #####################################
 ###                               ###
 ### MakeFile for Laravel Skeleton ###
@@ -51,6 +53,8 @@ tinker: #Run tinker
 	@sudo docker-compose exec app php artisan tinker
 
 
+run_com_app: #Run commands in PHP container c=[commands]
+	@sudo docker exec -it $(php) bash -c '$(c)'
 
 
 refresh: #Refresh the database and run all database seeds
