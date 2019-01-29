@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/nodejs/Dockerfile
+    container_name: nodejs
+    restart: unless-stopped
     depends_on:
       - app
     ports:
